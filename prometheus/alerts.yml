@@ -1,0 +1,11 @@
+groups:
+  - name: application-alerts
+    rules:
+      - alert: HighApplicationErrorRate
+        expr: sum(rate(http_errors_total[1m])) > 0.1
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Taxa elevada de erros na aplicacao"
+          description: "A aplicacao esta apresentando muitos erros HTTP 5xx."
